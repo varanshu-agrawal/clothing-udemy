@@ -8,11 +8,11 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient, gql } from 'apollo-boost';
 
-
 import { store, persistor } from './redux/store'
 
 import './index.css';
 import App from './App';
+import {resolvers, typeDefs} from './graphql/resolvers'
 
 const httpsLink = createHttpLink({
     uri: 'https://crwn-clothing.com'
@@ -22,8 +22,17 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
     link: httpsLink,
-    cache
+    cache,
+    typeDefs,
+    resolvers,
 });
+
+client.writeData({
+    data: {
+        cartHidden: true, 
+        cartItems : [],  
+    }
+})
 
 ReactDOM.render(
     <ApolloProvider client={client}>
