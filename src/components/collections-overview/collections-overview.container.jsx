@@ -20,7 +20,7 @@ const GET_COLLECTIONS = gql`
 }
 `
 
-const CollectionsOverviewContainer = () => {
+const CollectionsOverviewContainer = () => (
     <Query 
     query={GET_COLLECTIONS}
     >
@@ -33,6 +33,6 @@ const CollectionsOverviewContainer = () => {
             }
         }
     </Query>
-}
+)
 
 export default CollectionsOverviewContainer;
